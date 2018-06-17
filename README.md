@@ -18,7 +18,7 @@ The starter Angular app was created with [Angular CLI](https://angular.io/guide/
 ## 0: Build a stenciljs component and publish it to npm
 Creating your first stencil component is very easy and it is well documented [here](https://stenciljs.com/docs/my-first-component). 
 
-This example will consume the [@openchemistry/molecule-moljs](https://github.com/OpenChemistry/oc-web-components/tree/master/packages/molecule-moljs) compoent.
+This example will consume the [@openchemistry/molecule-moljs](https://github.com/OpenChemistry/oc-web-components/tree/master/packages/molecule-moljs) component.
 
 ## 1: Add the component to the dependencies
 
