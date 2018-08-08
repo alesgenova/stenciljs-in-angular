@@ -20,9 +20,7 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets",
-              { "glob": "**/*", "input": "node_modules/@openchemistry/molecule-moljs/dist", "output": "/assets/molecule-moljs" }
-              
+              "src/assets"              
             ],
             "styles": [
               "src/styles.css"

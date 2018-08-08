@@ -11,16 +11,18 @@ The starter Angular app was created with [Angular CLI](https://angular.io/guide/
 - [Stencil components in Vue](https://github.com/alesgenova/stenciljs-in-vue.git)
 
 ## Table of contents
-- [Add the component to the dependencies](#1-add-the-component-to-the-dependencies)
-- [Load the component](#2-load-the-component)
+- [Add the component(s) to the dependencies](#1-add-the-components-to-the-dependencies)
+- [Import the component](#2-import-the-components)
 - [Consume the component](#3-consume-the-component)
 
 ## 0: Build a stenciljs component and publish it to npm
 Creating your first stencil component is very easy and it is well documented [here](https://stenciljs.com/docs/my-first-component). 
 
-This example will consume the [@openchemistry/molecule-moljs](https://github.com/OpenChemistry/oc-web-components/tree/master/packages/molecule-moljs) component.
+This example will consume two components:
+- [@openchemistry/molecule-vtkjs](https://github.com/OpenChemistry/oc-web-components/tree/master/packages/molecule-vtkjs) : To display molecular structures
+- [split-me](https://github.com/alesgenova/split-me) : To create resizable split layouts
 
-## 1: Add the component to the dependencies
+## 1: Add the component(s) to the dependencies
 
 Add the component to the app dependencies in `package.json`
 
@@ -29,42 +31,19 @@ Add the component to the app dependencies in `package.json`
 
 "dependencies": {
   ...
-  "@openchemistry/molecule-moljs": "^0.0.7"
+  "@openchemistry/molecule-vtkjs": "^0.1.9",
+  "split-me": "^0.3.1"
 }
 ```
 
-In order to have the component code bundled with the app, copy the `dist/` folder of the component into the `assets/` folder of the app. This can be automated by adding a an element to the assets array in `angular.json` file.
+## 2: Import the component(s)
+Import the component in the `main.js` of the app:
+```js
+import { defineCustomElements as defineMolecule } from '@openchemistry/molecule-vtkjs';
+import { defineCustomElements as defineSplitMe } from 'split-me';
 
-```json
-// angular.json
-
-{
-  ... ,
-  "projects": {
-    "my-app": {
-      "architect": {
-        "build": {
-          ... ,
-          "options": {
-            ... ,
-            "assets": [
-              ... ,
-              { "glob": "**/*", "input": "node_modules/@openchemistry/molecule-moljs/dist", "output": "/assets/molecule-moljs" }
-              
-            ],
-            ... ,
-          }
-        }
-      }
-    }
-  }
-}
-```
-
-## 2: Load the component
-Now that the component code is in the `assets/molecule-moljs` folder, add the following to the `src/index.html` file.
-```html
-<script src='assets/molecule-moljs/molecule-moljs.js'></script>
+defineMolecule(window);
+defineSplitMe(window);
 ```
 
 ## 3: Consume the component
@@ -94,5 +73,8 @@ export class AppModule { }
 It is now possible to use the tag provided by the stencil component in any template of the app.
 
 ```html
-<oc-molecule-moljs [cjson]="molecule"></oc-molecule-moljs>
+<split-me n="2">
+  <oc-molecule-vtkjs slot="0" [cjson]="molecule0"></oc-molecule-vtkjs>
+  <oc-molecule-vtkjs slot="1" [cjson]="molecule1"></oc-molecule-vtkjs>
+</split-me>
 ```
