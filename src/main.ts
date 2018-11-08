@@ -4,8 +4,8 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
-import { defineCustomElements as defineMolecule } from '@openchemistry/molecule-vtkjs';
-import { defineCustomElements as defineSplitMe } from 'split-me';
+import { defineCustomElements as defineMolecule } from '@openchemistry/molecule-vtkjs/dist/loader';
+import { defineCustomElements as defineSplitMe } from 'split-me/dist/loader';
 
 defineMolecule(window);
 defineSplitMe(window);
